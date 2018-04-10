@@ -1,4 +1,4 @@
-package faculdade.sistemasDistribuidos.trabalho1;
+package faculdade.sistemasDistribuidos.trabalho1.rmi;
 
 import java.math.BigDecimal;
 import java.rmi.RemoteException;
@@ -16,22 +16,22 @@ public class RepositorioNotasRMI extends UnicastRemoteObject implements Reposito
 	protected RepositorioNotasRMI() throws RemoteException{
 		super();
 	}
-	public void cadastrar_nota(String mat, String cod_disc, BigDecimal nota) throws RemoteException{
+	public void cadastrar_nota(String matriculaAluno, String codigoDisciplina, BigDecimal nota) throws RemoteException{
 		// TODO Auto-generated method stub
 		
 	}
 
-	public BigDecimal consultar_nota(String mat, String cod_disc) throws RemoteException{
+	public BigDecimal consultar_nota(String matriculaAluno, String codigoDisciplina) throws RemoteException{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<BigDecimal> consultar_notas(String mat) throws RemoteException{
+	public List<BigDecimal> consultar_notas(String matriculaAluno) throws RemoteException{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BigDecimal consular_cr(String mat) throws RemoteException{
+	public BigDecimal consular_cr(String matriculaAluno) throws RemoteException{
 		// TODO Auto-generated method stub
 		return null;
 	}

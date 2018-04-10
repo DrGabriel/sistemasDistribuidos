@@ -1,8 +1,7 @@
-package faculdade.sistemasDistribuidos.trabalho1;
+package faculdade.sistemasDistribuidos.trabalho1.rmi;
 
 import java.rmi.Naming;
 import java.rmi.Remote;
-import java.rmi.registry.LocateRegistry;
 
 public class RepositorioNotasServer {
 	public RepositorioNotasServer(){

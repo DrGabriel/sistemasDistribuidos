@@ -1,4 +1,4 @@
-package faculdade.sistemasDistribuidos.trabalho1;
+package faculdade.sistemasDistribuidos.trabalho1.rmi;
 
 import java.math.BigDecimal;
 import java.rmi.Naming;
