@@ -2,50 +2,53 @@ package faculdade.sistemasDistribuidos.trabalho1.jpa;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 
-import faculdade.sistemasDistribuidos.trabalho1.validacao.FiltrosNota;
 
 @Entity
 public class Nota {
 	
-	@Id
-	private String matriculaAluno;
-	@Id
-	private String codigoDisciplina;
+	@EmbeddedId
+	private NotaId codigoDisciplinaMatriculaAluno;
+	@Column(name = "valor", nullable = false)
 	private BigDecimal nota;
 	
-	public String getMatriculaAluno() {
-		return matriculaAluno;
+	public Nota(){
+		
 	}
-	
-	public void setMatriculaAluno(String matriculaAluno) {
-		if(matriculaAluno.matches(FiltrosNota.filtroMatriculaAluno())) {
-			this.matriculaAluno = matriculaAluno;
-		}else {
-			throw new IllegalArgumentException("A matricula do aluno deve seguir o padrao ddddddddd-d, onde d é um digito 0-9");
+	public Nota(NotaId notaId){
+		this.setCodigoDisciplinaMatriculaAluno(notaId);
+	}
+	public NotaId getCodigoDisciplinaMatriculaAluno() {
+		return codigoDisciplinaMatriculaAluno;
+	}
+	public void setCodigoDisciplinaMatriculaAluno(NotaId codigoDisciplinaMatriculaAluno) {
+		if(codigoDisciplinaMatriculaAluno != null){
+			this.codigoDisciplinaMatriculaAluno = codigoDisciplinaMatriculaAluno;
 		}
 		
 	}
+
+	public String getMatriculaAluno() {
+		return codigoDisciplinaMatriculaAluno.getMatriculaAluno();
+	}
 	
 	public String getCodigoDisciplina() {
-		return codigoDisciplina;
+		return codigoDisciplinaMatriculaAluno.getCodigoDisciplina();
 	}
-	
-	public void setCodigoDisciplina(String codigoDisciplina) {
-		if(codigoDisciplina.matches(FiltrosNota.filtroCodigodisciplina())) {
-			this.codigoDisciplina = codigoDisciplina;
-		}else {
-			throw new IllegalArgumentException("A matricula do aluno deve seguir o padrao AAddd, onde A é uma letra de A-Z, maiuscula e d é um digito 0-9");
-		}
-	}
+
 	
 	public BigDecimal getNota() {
 		return nota;
 	}
 	public void setNota(BigDecimal nota) {
-		this.nota = nota;
+		if(nota.intValue() >=0 || nota.intValue() <= 10){
+			this.nota = nota;
+		}else{
+			throw new IllegalArgumentException("Nota invalida, deve estar no intervalo [0-10]");
+		}
+		
 	}
-	
 }
