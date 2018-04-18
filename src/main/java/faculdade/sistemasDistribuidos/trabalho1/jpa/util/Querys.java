@@ -36,17 +36,18 @@ public class Querys {
 		em.getTransaction().commit();
 		em.close();
 		
-		return resultadoCount == 1? true: false;
+		return resultadoCount >= 1? true: false;
 	}
 	
-	public static List<BigDecimal> listaNotas(String matriculaAluno){
+	public static List<Object[]> listaNotas(String matriculaAluno){
 		EntityManager em = new JPAUtil().getEntityManager();
 		em.getTransaction().begin();
-		String jpql = "select n.nota from Nota n where n.codigoDisciplinaMatriculaAluno.matriculaAluno = :pMatriculaAluno";
+		String jpql = "select n.nota,n.codigoDisciplinaMatriculaAluno.codigoDisciplina from Nota n where n.codigoDisciplinaMatriculaAluno.matriculaAluno = :pMatriculaAluno";
 	
 		Query query =  em.createQuery(jpql);
 		query.setParameter("pMatriculaAluno", matriculaAluno);
-		List<BigDecimal> notas= query.getResultList();
+		System.out.println(query.getResultList().get(0));
+		List<Object[]> notas= query.getResultList();
 		
 		em.getTransaction().commit();
 		em.close();

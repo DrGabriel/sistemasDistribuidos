@@ -6,7 +6,9 @@ import javax.persistence.Persistence;
 
 public class JPAUtil {
 	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("notas");
-	
+	public JPAUtil(){
+		
+	}
 	public EntityManager getEntityManager(){
 		return emf.createEntityManager();
 	}

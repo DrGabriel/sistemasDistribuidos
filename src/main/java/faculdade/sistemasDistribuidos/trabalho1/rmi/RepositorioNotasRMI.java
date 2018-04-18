@@ -66,7 +66,7 @@ public class RepositorioNotasRMI extends UnicastRemoteObject implements Reposito
 		return nota.getNota();
 	}
 
-	public List<BigDecimal> consultar_notas(String matriculaAluno) throws RemoteException{
+	public List<Object[]> consultar_notas(String matriculaAluno) throws RemoteException{
 		if(Querys.existeNota(matriculaAluno)){
 			return Querys.listaNotas(matriculaAluno);
 		}
@@ -74,9 +74,12 @@ public class RepositorioNotasRMI extends UnicastRemoteObject implements Reposito
 	}
 
 	public BigDecimal consular_cr(String matriculaAluno) throws RemoteException{
-		List<BigDecimal> notas = consultar_notas(matriculaAluno);
-		if(!notas.equals(null)){
-			BigDecimal soma = notas.stream().reduce((x, y) -> x.add(y)).get();
+		List<Object[]> notas = consultar_notas(matriculaAluno);
+		if(!(notas == null)){
+			BigDecimal soma = new BigDecimal(0);
+			for (Object[] objects : notas) {
+				soma = soma.add((BigDecimal)objects[0]);
+			}
 			return soma.divide(new BigDecimal(notas.size()));
 		}
 		return null;
